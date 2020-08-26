@@ -205,6 +205,7 @@ export default {
       };
       this.msgList.push(msg);
       this.socket.send(this.inputStr);
+      this.scrollToBottom();
     },
     destroyed() {
       this.socket.close();
