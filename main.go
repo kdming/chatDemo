@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	// ws server
+	// ws service
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		ws.UpgradeWs(w, r)
 	})

@@ -151,7 +151,9 @@ func remove(c *Client) {
 func broadcast(msg *Message) {
 
 	for _, client := range Clients {
-		if msg.Client.Key != client.Key {
+		if msg.Type == "2" {
+			client.Send <- makeMsg(msg)
+		} else if msg.Client.Key != client.Key {
 			client.Send <- makeMsg(msg)
 		}
 	}

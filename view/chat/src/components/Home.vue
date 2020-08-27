@@ -1,11 +1,11 @@
 <template>
   <div id="main">
-    <p>
+    <p style="font-size:15px;">
       简易聊天室 项目地址:
       <a href="https://github.com/kdming/chat.git">https://github.com/kdming/chat.git</a>
     </p>
     <el-container>
-      <el-header>
+      <el-header height="40px">
         <div id="header">
           <el-row :gutter="6" type="flex" justify="start" align="middle">
             <el-col :span="6">
@@ -115,7 +115,7 @@ export default {
         }
       ],
       inputStr: "",
-      wsuri: "ws://localhost:8080/ws?key=", // ws wss
+      wsuri: "ws://" + document.location.host + "/ws?key=", // ws wss
       lockReconnect: true, // 连接失败不进行重连
       maxReconnect: 5, // 最大重连次数，若连接失败
       socket: null
@@ -167,6 +167,7 @@ export default {
     },
     websocketonerror(e) {
       console.log("WebSocket连接发生错误", e);
+      alert("连接失败");
       this.reconnect();
     },
     websocketonmessage(e) {
@@ -189,11 +190,11 @@ export default {
       };
       this.msgList.push(msg);
       this.scrollToBottom();
-      // var div = document.getElementById("words");
-      // div.scrollTop = div.scrollHeight;
     },
     websocketclose(e) {
       console.log("connection closed (" + e.code + ")");
+      alert("连接断开，请重新连接");
+      this.onelineNum = 0;
       this.reconnect();
     },
     websocketsend() {
@@ -246,16 +247,18 @@ export default {
 <style scoped>
 #main {
   width: 100%;
+  padding-top: 0px;
   padding-bottom: 80px;
 }
 #header {
   width: 60%;
-  height: 35px;
-  margin: 10px auto 0;
+  height: 40px;
+  margin: 0px auto 0;
   /* margin: 0% 20% 0% 20%; */
   /* vertical-align: center; */
   padding-top: 10px;
-  border: solid 2px rgb(134, 197, 216);
+  /* border: solid 2px rgb(134, 197, 216); */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
 
 .el-main {
@@ -265,10 +268,11 @@ export default {
 .talk_show {
   width: 60%;
   height: 450px;
-  border: 2px solid #e0878d;
+  /* border: 2px solid #e0878d; */
   background: #fff;
   margin: 10px auto 0;
   padding-top: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   /* box-shadow: 0 2px 4px rgba(29, 28, 28, 0.12), 0 0 6px rgba(0, 0, 0, 0.04); */
   overflow: auto;
 }
@@ -278,7 +282,7 @@ export default {
   margin: 0% 20% 0% 20%;
   height: auto;
   text-align: center;
-  border: solid 1px rgb(219, 215, 215);
+  border: solid 1px rgb(123, 200, 236);
 }
 
 /* 聊天内容A css */
