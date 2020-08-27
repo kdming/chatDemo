@@ -40,7 +40,7 @@
             type="textarea"
             placeholder="请输入内容,回车键发送"
             v-model="inputStr"
-            maxlength="30"
+            maxlength="50"
             @keydown.native="sendMsg($event)"
             show-word-limit
           ></el-input>
@@ -176,7 +176,7 @@ export default {
       // 判断消息类型
       if (data.type === "2") {
         this.$notify({
-          title: "新用户上线通知",
+          title: "系统通知",
           message: data.msg,
           type: "success"
         });
