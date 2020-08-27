@@ -12,9 +12,9 @@ func main() {
 		ws.UpgradeWs(w, r)
 	})
 	// 打印在线人数
-	go ws.ShowOnlineNum()
+	//go ws.ShowOnlineNum()
 	// 启动监听服务
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":21120", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}

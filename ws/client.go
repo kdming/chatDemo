@@ -139,12 +139,13 @@ func (c *Client) sendMsg() {
 
 }
 
-// 移除无效客户端
+// 移除断连客户端
 func remove(c *Client) {
 	delete(Clients, c.Key)
 	msg := newMsg(c, c.Key+"下线了！")
 	msg.Type = "2"
 	broadcast(msg)
+	fmt.Println(msg.Msg)
 }
 
 // 广播消息
